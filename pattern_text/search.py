@@ -17,10 +17,10 @@ except NameError:
     basestring = str
 
 #--- TEXT, SENTENCE AND WORD ---------------------------------------------
-# The search() and match() functions work on Text, Sentence and Word objects (see pattern.text.tree),
+# The search() and match() functions work on Text, Sentence and Word objects (see pattern_text.tree),
 # i.e., the parse tree including part-of-speech tags and phrase chunk tags.
 
-# The pattern.text.search Match object will contain matched Word objects,
+# The pattern_text.search Match object will contain matched Word objects,
 # emulated with the following classes if the original input was a plain string:
 
 PUNCTUATION = ".,;:!?()[]{}`'\"@#$^&*+-|=~_"

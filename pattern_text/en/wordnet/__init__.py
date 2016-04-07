@@ -416,7 +416,7 @@ def map32(id, pos=NOUN):
 sys.path.insert(0, os.path.join(MODULE, "..", ".."))
 
 try:
-    from pattern.text import Sentiment
+    from pattern_text import Sentiment
 except:
     class Sentiment(object):
         PLACEHOLDER = True

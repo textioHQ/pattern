@@ -21,8 +21,8 @@ def find(function, list):
             return item
 
 ### MOOD #################################################################
-# Functions take Sentence objects, see pattern.text.tree.Sentence and
-# pattern.text.parsetree().
+# Functions take Sentence objects, see pattern_text.tree.Sentence and
+# pattern_text.parsetree().
 
 INDICATIVE = "indicative"  # They went for a walk.
 IMPERATIVE = "imperative"  # Let's go for a walk!
@@ -277,8 +277,8 @@ def mood(sentence, **kwargs):
         return INDICATIVE
 
 ### MODALITY #############################################################
-# Functions take Sentence objects, see pattern.text.tree.Sentence and
-# pattern.text.parsetree().
+# Functions take Sentence objects, see pattern_text.tree.Sentence and
+# pattern_text.parsetree().
 
 
 def d(*args):

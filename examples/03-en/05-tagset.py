@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 # It is a good idea to study the tagset and its abbreviations for a few
 # minutes.
 
-from pattern.en import parse as parse_en
+from pattern_text.en import parse as parse_en
 print(parse_en("the black cats", chunks=False))      # the/DT black/JJ cat/NNS
 print()
 

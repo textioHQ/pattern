@@ -4,7 +4,7 @@ from __future__ import print_function
 
 from util import *
 
-from pattern import text
+import pattern_text
 
 #-------------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ class TestLexicon(unittest.TestCase):
     def test_lazydict(self):
         # Assert lazy dictionary only has data after one of its methods is
         # called.
-        class V(text.lazydict):
+        class V(pattern_text.lazydict):
 
             def load(self):
                 dict.__setitem__(self, "a", 1)
@@ -26,11 +26,11 @@ class TestLexicon(unittest.TestCase):
         self.assertTrue(dict.__contains__(v, "a") is False)
         self.assertTrue(len(v), 1)
         self.assertTrue(v["a"] == 1)
-        print("pattern.text.lazydict")
+        print("pattern_text.lazydict")
 
     def test_lazylist(self):
         # Assert lazy list only has data after one of its methods is called.
-        class V(text.lazylist):
+        class V(pattern_text.lazylist):
 
             def load(self):
                 list.append(self, "a")
@@ -39,17 +39,17 @@ class TestLexicon(unittest.TestCase):
         self.assertTrue(list.__contains__(v, "a") is False)
         self.assertTrue(len(v), 1)
         self.assertTrue(v[0] == "a")
-        print("pattern.text.lazylist")
+        print("pattern_text.lazylist")
 
     def test_lexicon(self):
         # Assert lexicon from file (or file-like string).
         f1 = u";;; Comments. \n schrödinger NNP \n cat NN"
         f2 = StringIO(u";;; Comments. \n schrödinger NNP \n cat NN")
-        v1 = text.Lexicon(path=f1)
-        v2 = text.Lexicon(path=f2)
+        v1 = pattern_text.Lexicon(path=f1)
+        v2 = pattern_text.Lexicon(path=f2)
         self.assertEqual(v1[u"schrödinger"], "NNP")
         self.assertEqual(v2[u"schrödinger"], "NNP")
-        print("pattern.text.Lexicon")
+        print("pattern_text.Lexicon")
 
 #-------------------------------------------------------------------------
 
@@ -63,11 +63,11 @@ class TestFrequency(unittest.TestCase):
         # Assert word frequency from file (or file-like string).
         f1 = u";;; Comments. \n the 1.0000 \n of 0.5040"
         f2 = StringIO(u";;; Comments. \n the 1.0000 \n of 0.5040")
-        v1 = text.Frequency(path=f1)
-        v2 = text.Frequency(path=f2)
+        v1 = pattern_text.Frequency(path=f1)
+        v2 = pattern_text.Frequency(path=f2)
         self.assertEqual(v1[u"of"], 0.504)
         self.assertEqual(v2[u"of"], 0.504)
-        print("pattern.text.Frequency")
+        print("pattern_text.Frequency")
 
 #-------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ class TestModel(unittest.TestCase):
 
     def test_model(self):
         # Assert SLP language model.
-        v = text.Model()
+        v = pattern_text.Model()
         for i in range(2):
             v.train("black", "JJ", previous=("the", "DT"), next=("cat", "NN"))
             v.train("on", "IN", previous=("sat", "VBD"), next=("the", "DT"))
@@ -90,7 +90,7 @@ class TestModel(unittest.TestCase):
         self.assertEqual("IN", v.classify("on", next=("the", "")))
         self.assertEqual(
             ["white", "JJ"], v.apply(("white", ""), next=("cat", "")))
-        print("pattern.text.Model")
+        print("pattern_text.Model")
 
 #-------------------------------------------------------------------------
 
@@ -103,11 +103,11 @@ class TestMorphology(unittest.TestCase):
     def test_morphology(self):
         # Assert morphological tagging rules.
         f = StringIO(u"NN s fhassuf 1 NNS x")
-        v = text.Morphology(f)
+        v = pattern_text.Morphology(f)
         self.assertEqual(v.apply(
             ["cats", "NN"]),
             ["cats", "NNS"])
-        print("pattern.text.Morphology")
+        print("pattern_text.Morphology")
 
 #-------------------------------------------------------------------------
 
@@ -120,11 +120,11 @@ class TestContext(unittest.TestCase):
     def test_context(self):
         # Assert contextual tagging rules.
         f = StringIO(u"VBD VB PREVTAG TO")
-        v = text.Context(path=f)
+        v = pattern_text.Context(path=f)
         self.assertEqual(v.apply(
             [["to", "TO"], ["be", "VBD"]]),
             [["to", "TO"], ["be", "VB"]])
-        print("pattern.text.Context")
+        print("pattern_text.Context")
 
 #-------------------------------------------------------------------------
 
@@ -137,11 +137,11 @@ class TestEntities(unittest.TestCase):
     def test_entities(self):
         # Assert named entity recognizer.
         f = StringIO(u"Schrödinger's cat PERS")
-        v = text.Entities(path=f)
+        v = pattern_text.Entities(path=f)
         self.assertEqual(v.apply(
             [[u"Schrödinger's", "NNP"], ["cat", "NN"]]),
             [[u"Schrödinger's", "NNP-PERS"], ["cat", "NNP-PERS"]])
-        print("pattern.text.Entities")
+        print("pattern_text.Entities")
 
 #-------------------------------------------------------------------------
 
@@ -153,7 +153,7 @@ class TestParser(unittest.TestCase):
 
     def test_stringio(self):
         # Assert loading data from file-like strings.
-        p = text.Parser(lexicon={"to": "TO", "saw": "VBD"},
+        p = pattern_text.Parser(lexicon={"to": "TO", "saw": "VBD"},
                         morphology=StringIO(u"NN s fhassuf 1 NNS x"),
                         context=StringIO(u"VBD VB PREVTAG TO"))
         self.assertEqual(p.parse("cats"), "cats/NNS/B-NP/O")
@@ -161,7 +161,7 @@ class TestParser(unittest.TestCase):
 
     def test_find_keywords(self):
         # Assert the intrinsic keyword extraction algorithm.
-        p = text.Parser()
+        p = pattern_text.Parser()
         p.lexicon["the"] = "DT"
         p.lexicon["cat"] = "NN"
         p.lexicon["dog"] = "NN"
@@ -178,11 +178,11 @@ class TestParser(unittest.TestCase):
 
         self.assertEqual(v3, ["dog", "cat"])
         self.assertEqual(v3, ["dog", "cat"])
-        print("pattern.text.Parser.find_keywords()")
+        print("pattern_text.Parser.find_keywords()")
 
     def test_find_tokens(self):
         # Assert the default tokenizer and its optional parameters.
-        p = text.Parser()
+        p = pattern_text.Parser()
         v1 = p.find_tokens(
             u"Schrödinger's cat is alive!", punctuation="", replace={})
         v2 = p.find_tokens(
@@ -193,11 +193,11 @@ class TestParser(unittest.TestCase):
         self.assertEqual(v2[0], u"Schrödinger 's cat is dead !")
         self.assertEqual(v3[0], "etc .")
         self.assertEqual(v4[0], "etc.")
-        print("pattern.text.Parser.find_tokens()")
+        print("pattern_text.Parser.find_tokens()")
 
     def test_find_tags(self):
         # Assert the default part-of-speech tagger and its optional parameters.
-        p = text.Parser()
+        p = pattern_text.Parser()
         v1 = p.find_tags(
             [u"Schrödinger", "cat", "1.0"], lexicon={}, default=("NN?", "NNP?", "CD?"))
         v2 = p.find_tags(
@@ -214,11 +214,11 @@ class TestParser(unittest.TestCase):
             v3, [[u"Schr\xf6dinger", "NNP!"], ["cat", "NN!"], ["1.0", "CD!"]])
         self.assertEqual(v4, [["observer", "NN"], ["observable", "NN"]])
         self.assertEqual(v5, [["observer", "NN"], ["observable", "JJ"]])
-        print("pattern.text.Parser.find_tags()")
+        print("pattern_text.Parser.find_tags()")
 
     def test_find_chunks(self):
         # Assert the default phrase chunker and its optional parameters.
-        p = text.Parser()
+        p = pattern_text.Parser()
         v1 = p.find_chunks([["", "DT"], ["", "JJ"], ["", "NN"]], language="en")
         v2 = p.find_chunks([["", "DT"], ["", "JJ"], ["", "NN"]], language="es")
         v3 = p.find_chunks([["", "DT"], ["", "NN"], ["", "JJ"]], language="en")
@@ -231,7 +231,7 @@ class TestParser(unittest.TestCase):
             v3, [["", "DT", "B-NP", "O"], ["", "NN", "I-NP", "O"], ["", "JJ", "B-ADJP", "O"]])
         self.assertEqual(
             v4, [["", "DT", "B-NP", "O"], ["", "NN", "I-NP", "O"], ["", "JJ", "I-NP", "O"]])
-        print("pattern.text.Parser.find_chunks()")
+        print("pattern_text.Parser.find_chunks()")
 
 #-------------------------------------------------------------------------
 
@@ -243,7 +243,7 @@ class TestSentiment(unittest.TestCase):
 
     def test_dict(self):
         # Assert weighted average polarity and subjectivity for dictionary.
-        s = text.Sentiment()
+        s = pattern_text.Sentiment()
         v = {":-(": 4, ":-)": 1}
         self.assertEqual(s(v)[0], -0.5)
         self.assertEqual(s(v)[1], +1.0)
@@ -252,14 +252,14 @@ class TestSentiment(unittest.TestCase):
                          sorted([([":-("], -0.75, 1.0, "mood"),
                                  ([":-)"], +0.50, 1.0, "mood")]))
 
-        print("pattern.text.Sentiment.assessments")
+        print("pattern_text.Sentiment.assessments")
 
     def test_bag_of_words(self):
         # Assert weighted average polarity and subjectivity for bag-of-words
         # with weighted features.
         # Alias for pattern.vector.Document.
         from pattern.vector import BagOfWords
-        s = text.Sentiment()
+        s = pattern_text.Sentiment()
         v = BagOfWords({":-(": 4, ":-)": 1})
         self.assertEqual(s(v)[0], -0.5)
         self.assertEqual(s(v)[1], +1.0)
@@ -270,7 +270,7 @@ class TestSentiment(unittest.TestCase):
 
     def test_annotate(self):
         # Assert custom annotations.
-        s = text.Sentiment()
+        s = pattern_text.Sentiment()
         s.annotate("inconceivable", polarity=0.9, subjectivity=0.9)
         v = "inconceivable"
         self.assertEqual(s(v)[0], +0.9)
@@ -287,17 +287,17 @@ class TestMultilingual(unittest.TestCase):
     def test_language(self):
         raise unittest.SkipTest()
         # Assert language recognition.
-        self.assertEqual(text.language(u"the cat sat on the mat")[0], "en")
-        self.assertEqual(text.language(u"de kat zat op de mat")[0], "nl")
+        self.assertEqual(pattern_text.language(u"the cat sat on the mat")[0], "en")
+        self.assertEqual(pattern_text.language(u"de kat zat op de mat")[0], "nl")
         self.assertEqual(
-            text.language(u"le chat s'était assis sur le tapis")[0], "fr")
-        print("pattern.text.language()")
+            pattern_text.language(u"le chat s'était assis sur le tapis")[0], "fr")
+        print("pattern_text.language()")
 
     def test_deflood(self):
         # Assert flooding removal.
-        self.assertEqual(text.deflood("NIIICE!!!", n=1), "NICE!")
-        self.assertEqual(text.deflood("NIIICE!!!", n=2), "NIICE!!")
-        print("pattern.text.deflood()")
+        self.assertEqual(pattern_text.deflood("NIIICE!!!", n=1), "NICE!")
+        self.assertEqual(pattern_text.deflood("NIIICE!!!", n=2), "NIICE!!")
+        print("pattern_text.deflood()")
 
 #-------------------------------------------------------------------------
 

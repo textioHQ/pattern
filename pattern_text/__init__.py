@@ -25,8 +25,8 @@ try:
 except:
     MODULE = ""
 
-from pattern.text.tree import Tree, Text, Sentence, Slice, Chunk, PNPChunk, Chink, Word, table
-from pattern.text.tree import SLASH, WORD, POS, CHUNK, PNP, REL, ANCHOR, LEMMA, AND, OR
+from pattern_text.tree import Tree, Text, Sentence, Slice, Chunk, PNPChunk, Chink, Word, table
+from pattern_text.tree import SLASH, WORD, POS, CHUNK, PNP, REL, ANCHOR, LEMMA, AND, OR
 
 try:
     unicode

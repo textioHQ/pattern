@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 from pattern.web import Twitter
-from pattern.en import Sentence, parse
+from pattern_text.en import Sentence, parse
 from pattern.search import search
 from pattern.vector import Document, Model, KNN
 

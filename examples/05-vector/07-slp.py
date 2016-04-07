@@ -6,7 +6,7 @@ import random
 
 from codecs import open
 from collections import defaultdict
-from pattern.text import Model
+from pattern_text import Model
 from pattern.vector import shuffled, SLP
 from pattern.en import lexicon, parsetree
 from random import seed
@@ -49,7 +49,7 @@ data = list(corpus(path))
 # ignoring ambiguous entries in the lexicon,
 # handling them with the classifier instead.
 
-# For example, the lexicon in pattern.en will always tag "about" as IN (preposition),
+# For example, the lexicon in pattern_text.en will always tag "about" as IN (preposition),
 # even though it can also be used as RB (adverb) in about 25% of the cases.
 
 # We will add "about" to the set of words in the lexicon to ignore
@@ -116,7 +116,7 @@ for iteration in range(5):
 f = os.path.join(os.path.dirname(__file__), "en-model.slp")
 m.save(f, final=True)
 
-# Each parser in Pattern (pattern.en, pattern.es, pattern.it, ...)
+# Each parser in Pattern (pattern_text.en, pattern_text.es, pattern_text.it, ...)
 # assumes that a lexicon of known words and their most frequent tag is available,
 # along with some rules for morphology (suffixes, e.g., -ly = adverb)
 # and context (surrounding words) for unknown words.
