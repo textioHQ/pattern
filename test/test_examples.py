@@ -35,7 +35,8 @@ for example_py in glob.glob(examples):
     def _test(self, example_py=example_py, test_name=test_name):
         # todo capture output
         p = Popen([PYTHON, example_py], stderr=PIPE, stdout=PIPE)
-        out, err = p.communicate()
+        out, unierr = p.communicate()
+        err = unierr.decode('utf8')
 
         # TODO remove this, currently a couple of examples give HTTPErrors:
         # test_01web_02googletranslate HTTP401Authentication
