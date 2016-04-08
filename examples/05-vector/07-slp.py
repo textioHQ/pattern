@@ -8,7 +8,7 @@ from codecs import open
 from collections import defaultdict
 from pattern_text import Model
 from pattern.vector import shuffled, SLP
-from pattern.en import lexicon, parsetree
+from pattern_text.en import lexicon, parsetree
 from random import seed
 
 # This example demonstrates how a Perceptron classifier

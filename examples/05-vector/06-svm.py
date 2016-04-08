@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 import random
 
 from pattern.db import Datasheet
-from pattern.nl import tag, predicative
+from pattern_text.nl import tag, predicative
 from pattern.vector import SVM, KNN, NB, count, shuffled
 
 # This example demonstrates a Support Vector Machine (SVM).
