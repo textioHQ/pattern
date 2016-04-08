@@ -1,9 +1,10 @@
 include README.rst
 include LICENSE.txt
 
+recursive-include pattern_text *.txt *.py *.js *.slp *.xml
 recursive-include pattern *.txt *.py *.js *.slp *.xml
 
-include pattern/text/wordnet/dict/*
+include pattern_text/wordnet/dict/*
 include pattern/web/cache/tmp/*
 
 recursive-include pattern/vector/svm *.py *.txt COPYRIGHT *.so *.dll

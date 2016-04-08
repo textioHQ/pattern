@@ -3,7 +3,7 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
-from pattern.en import sentiment, polarity, subjectivity, positive
+from pattern_text.en import sentiment, polarity, subjectivity, positive
 
 # Sentiment analysis (or opinion mining) attempts to determine if
 # a text is objective or subjective, positive or negative.
@@ -25,8 +25,8 @@ print(sentiment(
 
 # The input string can be:
 # - a string,
-# - a Synset (see pattern.en.wordnet),
-# - a parsed Sentence, Text, Chunk or Word (see pattern.en),
+# - a Synset (see pattern_text.en.wordnet),
+# - a parsed Sentence, Text, Chunk or Word (see pattern_text.en),
 # - a Document (see pattern.vector).
 
 # The positive() function returns True if the string's polarity >= threshold.
@@ -49,7 +49,7 @@ print()
 # Put the file "SentiWordNet*.txt" in pattern/en/wordnet/
 # You can then use Synset.weight() and wordnet.sentiwordnet:
 
-#from pattern.en import wordnet, ADJECTIVE
+#from pattern_text.en import wordnet, ADJECTIVE
 # print wordnet.synsets("horrible", pos=ADJECTIVE)[0].weight # Yields a (polarity, subjectivity)-tuple.
 # print wordnet.sentiwordnet["horrible"]
 
@@ -73,7 +73,7 @@ for chunk, polarity, subjectivity, label in sentiment(s).assessments:
 # We could work this out from the fine-grained analysis.
 
 from pattern.metrics import avg
-from pattern.en import mood
+from pattern_text.en import mood
 
 a = sentiment(s).assessments
 

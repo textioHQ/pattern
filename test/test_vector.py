@@ -6,7 +6,7 @@ from util import *
 
 from pattern import vector
 
-from pattern.en import Text, Sentence, Word, parse
+from pattern_text.en import Text, Sentence, Word, parse
 from pattern.db import Datasheet
 
 from random import seed

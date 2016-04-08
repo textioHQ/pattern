@@ -2,8 +2,8 @@ from __future__ import print_function
 
 from util import *
 
-from pattern import search
-from pattern.en import Sentence, parse
+from pattern_text import search
+from pattern_text.en import Sentence, parse
 
 #-------------------------------------------------------------------------
 
