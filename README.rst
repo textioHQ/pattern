@@ -1,4 +1,10 @@
-Pattern
+Pattern_Text
+============
+
+Forked from https://github.com/pattern3/pattern which is an incomplete Python 3 port of https://github.com/clips/pattern
+Only the pattern.text.en package is included here (plus pattern.db and pattern.vector for tests) and has been renamed to pattern_text.en
+pattern_text is the Natural Language Processing component of pattern, and pattern_text.en is the English language part. 
+
 =======
 
 .. image:: https://travis-ci.org/pattern3/pattern.svg?branch=master
