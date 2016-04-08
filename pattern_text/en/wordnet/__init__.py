@@ -392,6 +392,7 @@ def map32(id, pos=NOUN):
     """ Returns an (id, pos)-tuple with the WordNet2 synset id for the given WordNet3 synset id.
         Returns None if no id was found.
     """
+    #TODO(kevin): convert decoding to Python 3
     global _map32_cache
     if not _map32_cache:
         _map32_cache = codecs.open(os.path.join(MODULE, "dict", "index.32"))\

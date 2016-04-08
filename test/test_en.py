@@ -629,6 +629,7 @@ class TestParser(unittest.TestCase):
         print("pattern_text.ngrams()")
 
     def test_command_line(self):
+        #TODO(kevin): fix commandline
         from sys import version_info
         if version_info[:2] == (2, 6):
             raise unittest.SkipTest("FIXME")
