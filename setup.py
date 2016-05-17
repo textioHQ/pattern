@@ -7,9 +7,9 @@ from sys import version_info
 
 
 def version():
-    """Return version string from pattern_text/__init__.py."""
+    """Return version string from pattern/__init__.py."""
     with open(os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                           'pattern_text',
+                           'pattern',
                            '__init__.py')) as input_file:
         for line in input_file:
             if line.startswith('__version__'):
