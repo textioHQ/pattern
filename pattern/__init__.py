@@ -42,7 +42,7 @@
 
 __author__ = "Tom De Smedt"
 __credits__ = "Tom De Smedt, Walter Daelemans"
-__version__ = "2.6"
+__version__ = "2.6.1"
 __copyright__ = "Copyright (c) 2010 University of Antwerp (BE)"
 __license__ = "BSD"
 
